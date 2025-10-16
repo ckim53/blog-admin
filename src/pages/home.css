@@ -1,0 +1,48 @@
+input,
+textarea,
+select {
+	width: 20rem;
+	padding: 0.75rem;
+	margin: 0.5rem 0 1rem;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	font-size: 1rem;
+	font-family: inherit;
+	box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+	border-color: #3a90cd;
+	box-shadow: 0 0 0 3px rgba(58, 144, 205, 0.2);
+	outline: none;
+}
+
+label {
+	display: block;
+	font-weight: 500;
+	margin-bottom: 0.25rem;
+}
+
+.home {
+	padding-left: 20px;
+}
+
+.home,
+#join {
+	color: white;
+}
+
+#join:hover {
+	color: lightblue;
+}
+
+#sign-up,
+.log-in {
+	color: white;
+}
+
+.welcome-title {
+	font-size: 50px;
+}
