@@ -4,7 +4,9 @@ import { getPostsFromAuthor } from '../services/api';
 import { useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import './home.css';
-function AdminHome() {
+import PostCard from '../components/PostCard';
+
+function Dashboard() {
 	const { authorId } = useParams();
 	const [posts, setPosts] = useState([]);
 	const { user } = useAuth();
@@ -30,4 +32,4 @@ function AdminHome() {
 	);
 }
 
-export default AdminHome;
+export default Dashboard;

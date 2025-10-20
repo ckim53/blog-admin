@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../../blog-admin/src/hooks/useAuth';
 import {
 	Group,
 	Button,
@@ -82,13 +82,15 @@ function PostDetails() {
 
 	return (
 		<div id="post-details">
-			<Container>
+			<Container m="xs">
 				<Stack gap="lg">
 					<Paper radius="lg" shadow="xl" p="xl">
-						<Title color="black" order={2}>
+						<Title color="black" order={1}>
 							{post.title}
 						</Title>
-						<Text my="xl">{post.content}</Text>
+						<Text mt="md" my="xl">
+							{post.content}
+						</Text>
 
 						<Paper bg="gray.1" radius="lg" shadow="sm" p="xl">
 							<Title order={4}>

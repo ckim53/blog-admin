@@ -19,15 +19,19 @@ select:focus {
 	outline: none;
 }
 
+.posts-grid {
+	margin-top: 20px;
+}
+
 label {
 	display: block;
 	font-weight: 500;
 	margin-bottom: 0.25rem;
 }
 
-.home {
+/* .home {
 	padding-left: 20px;
-}
+} */
 
 .home,
 #join {
@@ -35,14 +39,42 @@ label {
 }
 
 #join:hover {
-	color: lightblue;
+	color: #0077cc;
 }
 
 #sign-up,
 .log-in {
 	color: white;
+	text-decoration: none;
 }
 
-.welcome-title {
-	font-size: 50px;
+.log-in,
+.sign-up {
+	text-align: center;
+}
+
+.home ul {
+	list-style-type: none;
+}
+
+.welcome-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.welcome-paper {
+	width: 800px;
+	height: 350px;
+	max-width: 90%;
+	text-align: center;
+}
+
+#welcome-title {
+	color: #6f4e37;
+	font-size: 40px;
+}
+
+#welcome-description {
+	font-size: 20px;
 }

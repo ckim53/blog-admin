@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 import './home.css';
+import { Button } from '@mantine/core';
 
 export default function Login() {
 	const [username, setUsername] = useState('');
@@ -48,23 +49,32 @@ export default function Login() {
 						<strong id="sign-up">Sign Up</strong>
 					</Link>
 				</h3>
+				{error && <p style={{ color: 'red' }}>{error}</p>}
+				<input
+					type="text"
+					placeholder="Username"
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+				/>
+				<br />
+				<input
+					type="password"
+					placeholder="Password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+				<br />
+				<Button
+					type="submit"
+					style={{ backgroundColor: '#2e949f' }}
+					size="lg"
+					p="sm"
+					radius="md"
+					mt="md"
+				>
+					Log In
+				</Button>
 			</div>
-			{error && <p style={{ color: 'red' }}>{error}</p>}
-			<input
-				type="text"
-				placeholder="Username"
-				value={username}
-				onChange={(e) => setUsername(e.target.value)}
-			/>
-			<br />
-			<input
-				type="password"
-				placeholder="Password"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-			/>
-			<br />
-			<button type="submit">Log In</button>
 		</form>
 	);
 }

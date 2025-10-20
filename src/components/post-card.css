@@ -1,7 +1,7 @@
 .post-card {
 	border: 1px solid #eee;
 	border-radius: 8px;
-	padding: 16px;
+	padding: 25px;
 	margin-bottom: 16px;
 	background: #fff;
 	transition:
@@ -40,5 +40,5 @@
 .post-card-preview {
 	margin: 0;
 	color: #333;
-	line-height: 3rem;
+	line-height: 30px;
 }

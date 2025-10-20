@@ -10,7 +10,6 @@ export default function useAuth() {
 			const decoded = jwtDecode(token);
 			if (decoded.exp * 1000 > Date.now()) {
 				setIsAuthenticated(true);
-				console.log(decoded);
 				setUser(decoded);
 			} else {
 				logout();
