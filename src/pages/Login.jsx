@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import useAuth from '../hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 import './home.css';
 import { Button } from '@mantine/core';
+import { useAuth } from '../auth/AuthProvider';
 
 export default function Login() {
 	const [username, setUsername] = useState('');

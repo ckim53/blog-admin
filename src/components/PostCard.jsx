@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
 import './post-card.css';
-import useAuth from '../hooks/useAuth';
-import { Badge, Group, Text, Title } from '@mantine/core';
+import { Badge, Group, Paper, Text, Title } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/AuthProvider';
 
 function formatDate(iso) {
 	if (!iso) return '';
@@ -12,8 +12,18 @@ function formatDate(iso) {
 	});
 }
 
+function handleClick(isAuth, post, user, navigate) {
+	{
+		const route = isAuth
+			? `/admin/${user.id}/posts/${post.id}`
+			: `/posts/${post.id}`;
+		navigate(route);
+	}
+}
+
 export function PostCard({ post }) {
 	const { isAuthenticated, user } = useAuth();
+	const navigate = useNavigate();
 	const authorName =
 		post?.author?.displayName || post?.author?.username || 'Unknown';
 	const commentCount = Array.isArray(post?.comments) ? post.comments.length : 0;
@@ -22,19 +32,18 @@ export function PostCard({ post }) {
 			? `${post.content.slice(0, 120)}…`
 			: post?.content || '';
 	return (
-		<article className="post-card">
+		<Paper
+			onClick={() => {
+				handleClick(isAuthenticated, post, user, navigate);
+			}}
+			className="post-card"
+			p="xl"
+			radius="lg"
+		>
 			<header className="post-card-header">
 				<Group preventGrowOverflow={false} wrap="nowrap">
 					<Title className="post-card-title" order={2}>
-						{isAuthenticated ? (
-							<Link to={`/admin/${user.id}/posts/${post.id}`}>
-								{post.title || 'Untitled Post'}
-							</Link>
-						) : (
-							<Link to={`/posts/${post.id}`}>
-								{post.title || 'Untitled Post'}
-							</Link>
-						)}
+						{post.title}
 					</Title>
 					<Badge color={post.published ? 'blue' : 'gray'}>
 						{post.published ? 'Published' : 'Unpublished'}
@@ -46,7 +55,7 @@ export function PostCard({ post }) {
 				</Text>
 			</header>
 			<p className="post-card-preview">{preview}</p>
-		</article>
+		</Paper>
 	);
 }
 

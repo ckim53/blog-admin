@@ -2,9 +2,10 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { getPostsFromAuthor } from '../services/api';
 import { useState, useEffect } from 'react';
-import useAuth from '../hooks/useAuth';
-import './home.css';
+import './dashboard.css';
 import PostCard from '../components/PostCard';
+import { Text } from '@mantine/core';
+import { useAuth } from '../auth/AuthProvider';
 
 function Dashboard() {
 	const { authorId } = useParams();
@@ -20,8 +21,15 @@ function Dashboard() {
 	useEffect(() => {}, [user]);
 
 	return (
-		<div className="home">
-			<div className="welcome-title">Welcome, @{user?.username}</div>
+		<div className="dashboard">
+			<Text
+				styles={{
+					root: { color: 'white', fontSize: '40px', fontWeight: 'bold' },
+				}}
+				className="welcome-title"
+			>
+				My Dashboard
+			</Text>
 			<nav id="description"></nav>
 			<div className="posts-grid">
 				{posts.map((p) => (
