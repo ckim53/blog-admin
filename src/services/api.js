@@ -1,15 +1,8 @@
-const API_URL = 'http://localhost:3000';
+export const API_URL = 'http://localhost:3000';
+import { useApiFetch } from './apiFetch';
 
 export async function getPosts() {
-	const res = await fetch(`${API_URL}/posts`);
-	const json = await res.json();
-	return json.data;
-}
-
-export async function getPostsFromAuthor(authorId) {
-	const res = await fetch(`${API_URL}/admin/${authorId}/posts`, {
-		headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-	});
+	const res = await useApiFetch(`${API_URL}/posts`);
 	const json = await res.json();
 	return json.data;
 }

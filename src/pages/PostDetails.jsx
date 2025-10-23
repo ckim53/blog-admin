@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { IconEdit, IconCheck, IconX } from '@tabler/icons-react';
 import { useAuth } from '../auth/AuthProvider';
+import Comment from '../components/Comment';
+import { useApiFetch } from '../services/apiFetch';
+import { API_URL } from '../services/api';
 
 import {
 	Group,
@@ -21,20 +24,19 @@ function PostDetails() {
 	const [comments, setComments] = useState([]);
 	const [content, setContent] = useState('');
 	const token = localStorage.getItem('token');
+	const navigate = useNavigate();
+	const apiFetch = useApiFetch();
 
 	const togglePublish = async () => {
 		try {
-			const res = await fetch(
-				`http://localhost:3000/admin/${user.id}/posts/${id}`,
-				{
-					method: 'PUT',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${token}`,
-					},
-					body: JSON.stringify({ published: !post.published }),
-				}
-			);
+			const res = await apiFetch(`${API_URL}/admin/${user.id}/posts/${id}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`,
+				},
+				body: JSON.stringify({ published: !post.published }),
+			});
 			const json = await res.json();
 			setPost(json.data);
 		} catch (err) {
@@ -42,9 +44,13 @@ function PostDetails() {
 		}
 	};
 
+	const handleEdit = () => {
+		navigate(`/admin/${user.id}/posts/${post.id}/edit`);
+	};
+
 	const fetchComments = async () => {
 		try {
-			const res = await fetch(`http://localhost:3000/posts/${id}/comments`);
+			const res = await apiFetch(`${API_URL}/posts/${id}/comments`);
 			const json = await res.json();
 			setComments(json.data || []);
 		} catch (err) {
@@ -53,13 +59,13 @@ function PostDetails() {
 	};
 
 	useEffect(() => {
-		fetch(`http://localhost:3000/posts/${id}`)
+		apiFetch(`${API_URL}/posts/${id}`)
 			.then((res) => res.json())
 			.then((json) => setPost(json.data));
 	}, [id]);
 
 	useEffect(() => {
-		fetch(`http://localhost:3000/posts/${id}/comments`)
+		apiFetch(`${API_URL}/posts/${id}/comments`)
 			.then((res) => res.json())
 			.then((json) => setComments(json.data || []))
 			.catch((err) => console.error(err));
@@ -71,7 +77,7 @@ function PostDetails() {
 		e.preventDefault();
 
 		try {
-			const res = await fetch(`http://localhost:3000/posts/${id}/comments`, {
+			const res = await apiFetch(`${API_URL}/posts/${id}/comments`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -103,128 +109,129 @@ function PostDetails() {
 		}
 	};
 
-	return (
-		<div className="post-details">
-			<Stack>
-				<Container
-					styles={{
-						root: {
-							marginBottom: '60px',
-						},
-					}}
-				>
-					<Stack gap="lg">
-						<Paper radius="lg" shadow="xl" p="xl">
-							<Group>
-								<Title color="black" order={1}>
-									{post.title}
-								</Title>
-								<Badge size="md" color={post.published ? 'blue' : 'gray'}>
-									{post.published ? 'Published' : 'Unpublished'}
-								</Badge>
-								<Button
-									size="sm"
-									id="edit-button"
-									p="sm"
-									radius="md"
-									leftSection={<IconEdit size={20} />}
-									styles={{
-										root: {
-											backgroundColor: '#826B5B',
-											marginLeft: '290px',
-										},
-									}}
-								>
-									Edit Post
-								</Button>
-								<Button
-									onClick={togglePublish}
-									size="sm"
-									id="edit-button"
-									p="sm"
-									radius="md"
-									leftSection={
-										post.published ? (
-											<IconX size={20} />
-										) : (
-											<IconCheck size={20} />
-										)
-									}
-									styles={{
-										root: {
-											backgroundColor: '#826B5B',
-											marginLeft: '5px',
-										},
-									}}
-								>
-									{post.published ? 'Unpublish' : 'Publish'}
-								</Button>
-							</Group>
-							<Text size="md" mt="md" my="xl">
-								{post.content}
-							</Text>
-							<Paper bg="gray.1" radius="lg" shadow="sm" p="xl" mb="lg">
-								<Title order={4}>
-									{comments.length}{' '}
-									{comments.length === 1 ? 'Comment' : 'Comments'}
-								</Title>
-								{comments.length === 0 ? (
-									<Text>No comments yet</Text>
-								) : (
-									<Paper bg="white" mt="md" shadow="sm" p="md" radius="md">
-										<Stack>
-											{comments.map((c) => (
-												<Text key={c.id} component="div">
-													<Group gap="xl">
-														<Text fw={600}>{c.author.username}</Text>
-														<Text color="gray">
-															{new Date(c.createdAt).toLocaleString()}
-														</Text>
-													</Group>
-													<Text>{c.content}</Text>
-												</Text>
-											))}
-										</Stack>
-									</Paper>
-								)}
-							</Paper>
-							{isAuthenticated ? (
-								<Paper withBorder p="md" radius="md" mt="md">
-									<form onSubmit={handleSubmit}>
-										<textarea
-											placeholder="Add comment"
-											value={content}
-											onChange={(e) => setContent(e.target.value)}
-											required
-											style={{
-												width: '100%',
-												minHeight: '80px',
-												padding: '0.5rem',
-											}}
-										/>
+	if (!user) {
+		navigate('/');
+	} else {
+		return (
+			<div className="post-details">
+				<Stack>
+					<Container
+						styles={{
+							root: {
+								marginBottom: '60px',
+							},
+						}}
+					>
+						<Stack gap="lg">
+							<Paper radius="lg" shadow="xl" p="xl">
+								<Group justify="space-between" align="center" wrap="wrap">
+									<Group gap="sm" align="center">
+										<Title color="black" order={1}>
+											{post.title}
+										</Title>
+										<Badge size="md" color={post.published ? 'blue' : 'gray'}>
+											{post.published ? 'Published' : 'Unpublished'}
+										</Badge>
+									</Group>
+									<Group gap="sm" mt={{ base: 'sm', sm: 0 }}>
 										<Button
-											type="submit"
-											style={{ backgroundColor: '#2e949f' }}
-											size="md"
+											onClick={handleEdit}
+											size="sm"
+											id="edit-button"
 											p="sm"
 											radius="md"
-											mt="xs"
+											leftSection={<IconEdit size={20} />}
+											styles={{
+												root: {
+													backgroundColor: 'cornflowerblue',
+													marginLeft: '290px',
+												},
+											}}
 										>
-											Post Comment
+											Edit Post
 										</Button>
-									</form>
-								</Paper>
-							) : (
-								<Text c="dimmed" mt="md">
-									<a href="/log-in">Log in</a> to add a comment.
+										<Button
+											onClick={togglePublish}
+											size="sm"
+											id="edit-button"
+											p="xs"
+											radius="md"
+											leftSection={
+												post.published ? (
+													<IconX size={20} />
+												) : (
+													<IconCheck size={20} />
+												)
+											}
+											styles={{
+												root: {
+													backgroundColor: 'cornflowerblue',
+													marginLeft: '5px',
+												},
+											}}
+										>
+											{post.published ? 'Unpublish' : 'Publish'}
+										</Button>
+									</Group>
+								</Group>
+								<Text size="md" mt="md" my="xl">
+									{post.content}
 								</Text>
-							)}
-						</Paper>
-					</Stack>
-				</Container>
-			</Stack>
-		</div>
-	);
+								<Paper bg="gray.1" radius="lg" shadow="sm" p="xl" mb="lg">
+									<Title order={4}>
+										{comments.length}{' '}
+										{comments.length === 1 ? 'Comment' : 'Comments'}
+									</Title>
+									{comments.length === 0 ? (
+										<Text>No comments yet</Text>
+									) : (
+										<Paper bg="white" mt="md" shadow="sm" p="md" radius="md">
+											<Stack>
+												{comments.map((c) => (
+													<Comment key={c.id} comment={c} />
+												))}
+											</Stack>
+										</Paper>
+									)}
+								</Paper>
+								{isAuthenticated ? (
+									<Paper withBorder p="md" radius="md" mt="md">
+										<form onSubmit={handleSubmit}>
+											<textarea
+												placeholder="Add comment"
+												value={content}
+												onChange={(e) => setContent(e.target.value)}
+												required
+												style={{
+													width: '100%',
+													minHeight: '80px',
+													padding: '0.5rem',
+												}}
+											/>
+											<Button
+												type="submit"
+												style={{ backgroundColor: '#2e949f' }}
+												size="md"
+												p="sm"
+												radius="md"
+												mt="xs"
+											>
+												Post Comment
+											</Button>
+										</form>
+									</Paper>
+								) : (
+									<Text c="dimmed" mt="md">
+										<a href="/log-in">Log in</a> to add a comment.
+									</Text>
+								)}
+							</Paper>
+						</Stack>
+					</Container>
+				</Stack>
+			</div>
+		);
+	}
 }
 
 export default PostDetails;

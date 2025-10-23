@@ -7,6 +7,7 @@ import Layout from './components/Layout';
 import DetailsLayout from './components/DetailsLayout';
 import Dashboard from './pages/Dashboard';
 import { AuthProvider } from './auth/AuthProvider';
+import EditPost from './pages/EditPost';
 
 function App() {
 	return (
@@ -23,6 +24,10 @@ function App() {
 						<Route
 							path="/admin/:authorId/posts/:id"
 							element={<PostDetails />}
+						/>
+						<Route
+							path="/admin/:authorId/posts/:id/edit"
+							element={<EditPost />}
 						/>
 					</Route>
 				</Routes>

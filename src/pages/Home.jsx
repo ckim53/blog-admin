@@ -1,18 +1,8 @@
-import { getPosts } from '../services/api';
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './home.css';
 import { Paper, Title, Text, Button } from '@mantine/core';
+import './home.css';
 
 function Home() {
-	const [posts, setPosts] = useState([]);
-
-	useEffect(() => {
-		getPosts()
-			.then((data) => setPosts(data))
-			.catch((err) => console.error(err));
-	}, []);
-
 	return (
 		<div className="home">
 			<nav id="description"></nav>
