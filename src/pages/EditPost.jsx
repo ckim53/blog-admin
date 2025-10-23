@@ -63,6 +63,30 @@ function EditPost() {
 		}
 	};
 
+	const handleDeletePost = async (id) => {
+		const confirmDelete = window.confirm(
+			'Are you sure you want to delete this post?'
+		);
+		if (!confirmDelete) return;
+
+		try {
+			const res = await apiFetch(
+				`${API_URL}/admin/${user.id}/posts/${post.id}`,
+				{
+					method: 'DELETE',
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+
+			if (!res.ok) throw new Error('Failed to delete post');
+			navigate(`/admin/${user.id}/posts`);
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
 	useEffect(() => {
 		apiFetch(`${API_URL}/posts/${id}`)
 			.then((res) => res.json())
@@ -124,7 +148,7 @@ function EditPost() {
 				<Container size={800} mb="lg">
 					<Stack gap="lg">
 						<Paper radius="lg" shadow="xl" p="xl">
-							<Group>
+							<Group justify="space-between">
 								<Input
 									autoFocus
 									color="black"
@@ -137,6 +161,9 @@ function EditPost() {
 										setPost({ ...post, title: e.target.value });
 									}}
 								></Input>
+								<Button variant="light" color="red" onClick={handleDeletePost}>
+									Delete Post
+								</Button>
 							</Group>
 							<Textarea
 								autosize
