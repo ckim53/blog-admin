@@ -4,7 +4,7 @@ import { API_URL } from '../services/api';
 import Comment from '../components/Comment';
 import { useApiFetch } from '../services/apiFetch';
 import { useAuth } from '../auth/AuthProvider';
-import './edit.css';
+
 import {
 	Input,
 	Group,
@@ -14,6 +14,7 @@ import {
 	Title,
 	Stack,
 	Textarea,
+	Box,
 } from '@mantine/core';
 
 function EditPost() {
@@ -143,11 +144,11 @@ function EditPost() {
 	};
 
 	return (
-		<div className="post-details">
-			<form onSubmit={handleSubmit}>
-				<Container size={800} mb="lg">
-					<Stack gap="lg">
-						<Paper radius="lg" shadow="xl" p="xl">
+		<Box>
+			<form onSubmit={handleSubmit} style={{ width: '800px' }}>
+				<Container mb="lg">
+					<Paper radius="lg" shadow="xl" p="xl">
+						<Stack gap="lg">
 							<Group justify="space-between">
 								<Input
 									autoFocus
@@ -195,35 +196,36 @@ function EditPost() {
 									</Paper>
 								)}
 							</Paper>
-							<Button
-								type="submit"
-								disabled={!isChanged}
-								sx={{
-									backgroundColor: isChanged ? '#2e949f' : '#ccc',
-									color: 'white',
-									cursor: isChanged ? 'pointer' : 'not-allowed',
-									transition: 'background-color 0.2s ease',
-									'&:hover': {
-										backgroundColor: isChanged ? '#277d88' : '#ccc',
-									},
-								}}
-							>
-								Save Changes
-							</Button>
-							<Button
-								mx="md"
-								variant="outline"
-								color="gray"
-								radius="md"
-								onClick={() => navigate(-1)}
-							>
-								Cancel
-							</Button>
-						</Paper>
-					</Stack>
+						</Stack>
+						<Button
+							radius="md"
+							type="submit"
+							disabled={!isChanged}
+							sx={{
+								backgroundColor: isChanged ? '#2e949f' : '#ccc',
+								color: 'white',
+								cursor: isChanged ? 'pointer' : 'not-allowed',
+								transition: 'background-color 0.2s ease',
+								'&:hover': {
+									backgroundColor: isChanged ? '#277d88' : '#ccc',
+								},
+							}}
+						>
+							Save Changes
+						</Button>
+						<Button
+							mx="md"
+							variant="outline"
+							color="gray"
+							radius="md"
+							onClick={() => navigate(-1)}
+						>
+							Cancel
+						</Button>
+					</Paper>
 				</Container>
 			</form>
-		</div>
+		</Box>
 	);
 }
 

@@ -1,23 +1,37 @@
 import { Link } from 'react-router-dom';
-import { Paper, Title, Text, Button } from '@mantine/core';
-import './home.css';
+import { Paper, Title, Text, Button, Box } from '@mantine/core';
 
 function Home() {
 	return (
 		<div className="home">
-			<nav id="description"></nav>
-			<div className="welcome-container">
+			<Box
+				style={{
+					display: 'flex',
+					justifyContent: 'center',
+					marginTop: '20px',
+				}}
+			>
 				<Paper
-					className="welcome-paper"
 					shadow="xl"
 					radius="lg"
 					p="xl"
 					withBorder
+					style={{
+						width: '800px',
+						height: '350px',
+						maxWidth: '90%',
+						textAlign: 'center',
+					}}
 				>
-					<Title id="welcome-title" order={2} ta="center" mb="sm">
+					<Title
+						order={2}
+						ta="center"
+						mb="sm"
+						style={{ color: ' #6f4e37', fontSize: '40px' }}
+					>
 						Welcome to Coffee Break ☕
 					</Title>
-					<Text id="welcome-description" c="dimmed" ta="center">
+					<Text c="dimmed" ta="center" style={{ fontSize: '20px' }}>
 						A space to slow down, reflect, and share thoughts—one sip at a time.
 					</Text>
 					<Button
@@ -44,7 +58,7 @@ function Home() {
 						Sign Up
 					</Button>
 				</Paper>
-			</div>
+			</Box>
 		</div>
 	);
 }

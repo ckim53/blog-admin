@@ -1,6 +1,6 @@
-import { Button } from '@mantine/core';
+import { Button, Box, Title, Input } from '@mantine/core';
 import { useState } from 'react';
-import './home.css';
+
 
 export default function SignUp() {
 	const [username, setUsername] = useState('');
@@ -39,32 +39,45 @@ export default function SignUp() {
 	};
 
 	return (
-		<div className="sign-up">
+		<Box ta="center">
 			<form onSubmit={handleSubmit}>
-				<h1 id="sign-up">Sign Up</h1>
-				{error && <p style={{ color: 'red' }}>{error}</p>}
+				<Title mb="20px" order={1} c="white" td="none">
+					Sign Up
+				</Title>
+				{error &&
+					error.split(';').map((msg, i) => (
+						<p key={i} style={{ color: 'red', margin: 0 }}>
+							{msg.trim()}
+						</p>
+					))}
 				{success && <p style={{ color: 'green' }}>{success}</p>}
-				<input
+				<Input
+					my="lg"
+					size="md"
+					radius="md"
 					type="text"
 					placeholder="Username"
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
-				/>
-				<br />
-				<input
+				></Input>
+				<Input
+					my="lg"
+					size="md"
+					radius="md"
 					type="password"
 					placeholder="Password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
-				/>
-				<br />
-				<input
+				></Input>
+				<Input
+					my="lg"
+					size="md"
+					radius="md"
 					type="password"
 					placeholder="Confirm Password"
 					value={passwordConfirmation}
 					onChange={(e) => setPasswordConfirmation(e.target.value)}
-				/>
-				<br />
+				></Input>
 				<Button
 					type="submit"
 					style={{ backgroundColor: '#2e949f' }}
@@ -76,6 +89,6 @@ export default function SignUp() {
 					Sign Up
 				</Button>
 			</form>
-		</div>
+		</Box>
 	);
 }
