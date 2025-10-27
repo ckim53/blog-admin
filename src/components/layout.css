@@ -30,12 +30,9 @@
 	display: flex;
 	justify-content: center;
 	padding-top: 40px;
+	padding-bottom: 40px;
 	max-width: 100%;
 	background-color: #0b1e36;
-}
-
-#home {
-	color: white;
 }
 
 .posts-grid {
@@ -58,10 +55,4 @@
 	.posts-grid {
 		column-count: 1;
 	}
-}
-
-#login,
-#logout {
-	margin-right: 30px;
-	font-size: 1.5rem;
 }

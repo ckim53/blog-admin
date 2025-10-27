@@ -16,26 +16,26 @@ export default function DetailsLayout() {
 	}, []);
 
 	return (
-		<Box className="details-layout" pos="relative" mih="100vh">
+		<Box className="details-layout" pos="relative" mih="100vh" p="xl" pb="xl">
 			<Button
 				size="md"
-				m="30px"
+				m="lg"
+				radius="md"
 				leftSection={<IconArrowLeft size={15} />}
 				component={Link}
 				to={`/admin/${user.id}/posts`}
 				styles={{
 					root: {
 						backgroundColor: 'steelblue',
-						marginLeft: '30px',
 						width: 'fit-content',
 					},
 				}}
 			>
 				Back to Dashboard
 			</Button>
-			<Container size="md">
+			<Box pt="lg" pb="xl" px="15rem">
 				<Outlet />
-			</Container>
+			</Box>
 		</Box>
 	);
 }

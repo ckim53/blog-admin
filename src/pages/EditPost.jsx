@@ -15,6 +15,7 @@ import {
 	Stack,
 	Textarea,
 	Box,
+	Switch,
 } from '@mantine/core';
 
 function EditPost() {
@@ -105,8 +106,11 @@ function EditPost() {
 		const contentChanged = post.content !== originalPost.content;
 		const commentCountChanged =
 			comments.length !== (originalPost.comments?.length || 0);
+		const publishedChanged = post.published !== originalPost.published;
 
-		setIsChanged(titleChanged || contentChanged || commentCountChanged);
+		setIsChanged(
+			titleChanged || contentChanged || commentCountChanged || publishedChanged
+		);
 	}, [post, comments, originalPost]);
 
 	useEffect(() => {
@@ -166,6 +170,14 @@ function EditPost() {
 									Delete Post
 								</Button>
 							</Group>
+							<Switch
+								size="md"
+								defaultChecked
+								label="Publish"
+								onChange={(e) => {
+									setPost({ ...post, published: e.target.value });
+								}}
+							/>
 							<Textarea
 								autosize
 								size="md"

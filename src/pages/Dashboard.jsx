@@ -7,6 +7,7 @@ import { useAuth } from '../auth/AuthProvider';
 import { useApiFetch } from '../services/apiFetch';
 import { API_URL } from '../services/api';
 import { IconLibraryPlus } from '@tabler/icons-react';
+import LogoutButton from '../components/LogoutButton';
 
 function Dashboard() {
 	const { authorId } = useParams();
@@ -53,6 +54,7 @@ function Dashboard() {
 				>
 					New Post
 				</Button>
+				<LogoutButton />
 			</Group>
 			<Box className="posts-grid">
 				{posts.map((p) => (

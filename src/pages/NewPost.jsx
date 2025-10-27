@@ -77,6 +77,7 @@ function NewPost() {
 								/>
 							</Group>
 							<Textarea
+								required
 								autosize
 								minRows={4}
 								maxRows={12}

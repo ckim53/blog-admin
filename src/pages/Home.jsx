@@ -1,7 +1,31 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Paper, Title, Text, Button, Box } from '@mantine/core';
+import { useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 function Home() {
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const userId = localStorage.getItem('userId');
+		const token = localStorage.getItem('token');
+		if (!token || !userId) return;
+
+		try {
+			const raw = token.startsWith('Bearer ') ? token.slice(7) : token;
+			const decoded = jwtDecode(raw);
+			const isExpired = decoded.exp * 1000 < Date.now();
+
+			if (!isExpired) {
+				navigate(`/admin/${userId}/posts`, { replace: true });
+			} else {
+				localStorage.removeItem('token');
+			}
+		} catch (err) {
+			console.error('Invalid token:', err);
+			localStorage.removeItem('token');
+		}
+	}, [navigate]);
 	return (
 		<div className="home">
 			<Box
