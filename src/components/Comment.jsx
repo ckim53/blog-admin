@@ -7,12 +7,14 @@ export default function Comment({ comment, edit = false, handleDelete }) {
 		<Group justify={'space-between'}>
 			<Text key={comment.id} component="div">
 				<Group gap="xl">
-					<Text fw={600}>{comment.author.username}</Text>
+					<Text size="lg" fw={700}>
+						{comment.author.username}
+					</Text>
 					<Text color="gray">
 						{new Date(comment.createdAt).toLocaleString()}
 					</Text>
 				</Group>
-				<Text>{comment.content}</Text>
+				<Text size="lg">{comment.content}</Text>
 			</Text>
 			{edit ? (
 				<Button variant="subtle" onClick={() => handleDelete(comment.id)}>

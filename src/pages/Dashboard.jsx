@@ -6,7 +6,7 @@ import { Text, Box, Button, Group } from '@mantine/core';
 import { useAuth } from '../auth/AuthProvider';
 import { useApiFetch } from '../services/apiFetch';
 import { API_URL } from '../services/api';
-import { IconLibraryPlus } from '@tabler/icons-react';
+import { IconLibraryPlus, IconCoffee } from '@tabler/icons-react';
 import LogoutButton from '../components/LogoutButton';
 
 function Dashboard() {
@@ -33,7 +33,7 @@ function Dashboard() {
 
 	return (
 		<Box px={50}>
-			<Group>
+			<Group mt={10} mb={30}>
 				<Text
 					mb={20}
 					style={{
@@ -42,8 +42,15 @@ function Dashboard() {
 						fontWeight: 'bold',
 					}}
 				>
-					My Dashboard
+					My Dashboard{' '}
 				</Text>
+				<IconCoffee
+					style={{
+						marginBottom: '25px',
+						color: 'white',
+					}}
+					size={45}
+				></IconCoffee>
 				<Button
 					onClick={handleNewPost}
 					radius="md"

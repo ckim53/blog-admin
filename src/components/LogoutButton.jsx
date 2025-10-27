@@ -16,8 +16,8 @@ function LogoutButton() {
 			color="white"
 			variant="subtle"
 			radius="md"
-			size="md"
-			style={{ position: 'absolute', top: '55px', right: '55px' }}
+			size="lg"
+			style={{ position: 'absolute', top: '55px', right: '50px' }}
 		>
 			Log Out
 		</Button>

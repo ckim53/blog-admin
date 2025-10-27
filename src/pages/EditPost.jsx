@@ -137,6 +137,7 @@ function EditPost() {
 				body: JSON.stringify({
 					title: post.title,
 					content: post.content,
+					published: post.published,
 				}),
 			});
 
@@ -172,15 +173,15 @@ function EditPost() {
 							</Group>
 							<Switch
 								size="md"
-								defaultChecked
+								checked={post.published}
 								label="Publish"
 								onChange={(e) => {
-									setPost({ ...post, published: e.target.value });
+									setPost({ ...post, published: e.currentTarget.checked });
 								}}
 							/>
 							<Textarea
 								autosize
-								size="md"
+								size="lg"
 								value={post.content}
 								onChange={(e) => {
 									setPost({ ...post, content: e.target.value });
@@ -210,22 +211,21 @@ function EditPost() {
 							</Paper>
 						</Stack>
 						<Button
+							size="md"
 							radius="md"
 							type="submit"
 							disabled={!isChanged}
-							sx={{
+							style={{
 								backgroundColor: isChanged ? '#2e949f' : '#ccc',
 								color: 'white',
 								cursor: isChanged ? 'pointer' : 'not-allowed',
 								transition: 'background-color 0.2s ease',
-								'&:hover': {
-									backgroundColor: isChanged ? '#277d88' : '#ccc',
-								},
 							}}
 						>
 							Save Changes
 						</Button>
 						<Button
+							size="md"
 							mx="md"
 							variant="outline"
 							color="gray"

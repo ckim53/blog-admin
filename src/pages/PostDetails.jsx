@@ -133,6 +133,7 @@ function PostDetails() {
 				>
 					<Stack style={{ minWidth: 0 }}>
 						<Title
+							size={45}
 							wrap="wrap"
 							color="black"
 							order={1}
@@ -141,7 +142,7 @@ function PostDetails() {
 							{post.title}
 						</Title>
 						<Group gap="sm" align="center" wrap="wrap">
-							<Badge color={post.published ? 'blue' : 'gray'}>
+							<Badge size="lg" color={post.published ? 'blue' : 'gray'}>
 								{post.published ? 'Published' : 'Unpublished'}
 							</Badge>
 							<Button
@@ -151,47 +152,32 @@ function PostDetails() {
 								mt={{ base: 'sm', sm: 0 }}
 								style={{ width: 'fit-content' }}
 							>
-								<IconEdit size={25} />
+								<IconEdit size={30} />
 							</Button>
 						</Group>
-						<Text color="gray" size="sm" mt="sm">
+						<Text color="gray" size="lg">
 							By {post?.author?.username} • {formatDate(post?.createdAt)}
 						</Text>
 					</Stack>
-
-					{/* <Button
-							onClick={togglePublish}
-							size="sm"
-							id="edit-button"
-							p="xs"
-							radius="md"
-							leftSection={
-								post.published ? <IconX size={20} /> : <IconCheck size={20} />
-							}
-							styles={{
-								backgroundColor: 'cornflowerblue',
-								marginLeft: '5px',
-							}}
-						>
-							{post.published ? 'Unpublish' : 'Publish'}
-						</Button> */}
-					{/* <Switch
-							size="md"
-							defaultChecked
-							label="Publish"
-							onChange={togglePublish}
-						/> */}
 				</Group>
 
-				<Text size="md" mt="md" my="xl">
+				<Text
+					size="xl"
+					mt="md"
+					my="xl"
+					style={{
+						whiteSpace: 'pre-wrap',
+						lineHeight: 1.7,
+					}}
+				>
 					{post.content}
 				</Text>
-				<Paper bg="gray.1" radius="lg" shadow="sm" p="xl" mb="lg">
-					<Title order={4}>
+				<Paper bg="gray.1" radius="lg" shadow="xs" p="xl" mb="lg">
+					<Title order={3}>
 						{comments.length} {comments.length === 1 ? 'Comment' : 'Comments'}
 					</Title>
 					{comments.length === 0 ? (
-						<Text>No comments yet</Text>
+						<Text size="lg">No comments yet</Text>
 					) : (
 						<Paper bg="white" mt="md" shadow="sm" p="md" radius="md">
 							<Stack>
@@ -216,6 +202,7 @@ function PostDetails() {
 									padding: '0.5rem',
 									borderRadius: '5px',
 									borderWidth: '0.5px',
+									fontSize: 'large',
 								}}
 							/>
 							<Button

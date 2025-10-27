@@ -82,22 +82,30 @@ function NewPost() {
 								minRows={4}
 								maxRows={12}
 								placeholder="Content"
-								size="md"
+								size="lg"
 								onChange={(e) => setPost({ ...post, content: e.target.value })}
 							/>
 						</Stack>
-						<Button radius="md" type="submit" onClick={handleSubmit}>
-							Create Post
-						</Button>
-						<Button
-							m="md"
-							variant="outline"
-							color="gray"
-							radius="md"
-							onClick={() => navigate(-1)}
-						>
-							Cancel
-						</Button>
+						<Group mt="lg">
+							<Button
+								size="md"
+								radius="md"
+								type="submit"
+								onClick={handleSubmit}
+							>
+								Create Post
+							</Button>
+							<Button
+								size="md"
+								m="md"
+								variant="outline"
+								color="gray"
+								radius="md"
+								onClick={() => navigate(-1)}
+							>
+								Cancel
+							</Button>
+						</Group>
 					</Paper>
 				</Container>
 			</form>
