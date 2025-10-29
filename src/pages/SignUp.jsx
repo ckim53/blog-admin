@@ -40,66 +40,80 @@ export default function SignUp() {
 	};
 
 	return (
-		<Box ta="center" mt={30}>
-			<form onSubmit={handleSubmit}>
-				<Title mb="20px" order={1} c="white" td="none">
-					Sign Up
-				</Title>
-				{error &&
-					error.split(';').map((msg, i) => (
-						<p key={i} style={{ color: 'red', margin: 0 }}>
-							{msg.trim()}
-						</p>
-					))}
-				{success && <p style={{ color: 'green' }}>{success}</p>}
-				<Input
-					my="lg"
-					size="md"
-					radius="md"
-					type="text"
-					placeholder="Username"
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-				></Input>
-				<Input
-					my="lg"
-					size="md"
-					radius="md"
-					type="password"
-					placeholder="Password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				></Input>
-				<Input
-					my="lg"
-					size="md"
-					radius="md"
-					type="password"
-					placeholder="Confirm Password"
-					value={passwordConfirmation}
-					onChange={(e) => setPasswordConfirmation(e.target.value)}
-				></Input>
-				<Button
-					type="submit"
-					style={{ backgroundColor: '#2e949f' }}
-					size="lg"
-					p="sm"
-					radius="md"
-					my="md"
+		<Box
+			mih="100vh"
+			bg="#0b1e36"
+			style={{
+				display: 'flex',
+				justifyContent: 'center',
+				overflowY: 'auto',
+			}}
+		>
+			<Box ta="center" mt={30} pt={40} pb={40}>
+				<form onSubmit={handleSubmit}>
+					<Title mb="20px" order={1} c="white" td="none">
+						Sign Up
+					</Title>
+
+					{error &&
+						error.split(';').map((msg, i) => (
+							<p key={i} style={{ color: 'red', margin: 0 }}>
+								{msg.trim()}
+							</p>
+						))}
+					{success && <p style={{ color: 'green' }}>{success}</p>}
+
+					<Input
+						my="lg"
+						size="md"
+						radius="md"
+						type="text"
+						placeholder="Username"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+					/>
+					<Input
+						my="lg"
+						size="md"
+						radius="md"
+						type="password"
+						placeholder="Password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+					<Input
+						my="lg"
+						size="md"
+						radius="md"
+						type="password"
+						placeholder="Confirm Password"
+						value={passwordConfirmation}
+						onChange={(e) => setPasswordConfirmation(e.target.value)}
+					/>
+					<Button
+						type="submit"
+						style={{ backgroundColor: '#2e949f' }}
+						size="lg"
+						p="sm"
+						radius="md"
+						my="md"
+					>
+						Sign Up
+					</Button>
+				</form>
+
+				<Title
+					td="none"
+					component={Link}
+					to="/"
+					c="white"
+					fw={700}
+					order={5}
+					mt="lg"
 				>
-					Sign Up
-				</Button>
-			</form>
-			<Title
-				td="none"
-				component={Link}
-				to="/"
-				c="white"
-				fontWeight={700}
-				order={5}
-			>
-				Back to Home
-			</Title>
+					Back to Home
+				</Title>
+			</Box>
 		</Box>
 	);
 }

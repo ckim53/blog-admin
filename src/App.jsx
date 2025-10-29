@@ -18,8 +18,6 @@ function App() {
 					<Route element={<Layout />}>
 						<Route path="/" element={<Home />} />
 						<Route path="/admin/:authorId/posts" element={<Dashboard />} />
-						<Route path="/log-in" element={<Login />} />
-						<Route path="/sign-up" element={<SignUp />} />
 					</Route>
 					<Route element={<DetailsLayout />}>
 						<Route
@@ -32,8 +30,10 @@ function App() {
 						/>
 						<Route path="/admin/:authorId/posts/new" element={<NewPost />} />
 					</Route>
+					<Route path="/log-in" element={<Login />} />
+					<Route path="/sign-up" element={<SignUp />} />
 				</Routes>
-			</BrowserRouter> 
+			</BrowserRouter>
 		</AuthProvider>
 	);
 }
