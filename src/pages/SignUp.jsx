@@ -1,6 +1,6 @@
 import { Button, Box, Title, Input } from '@mantine/core';
 import { useState } from 'react';
-
+import { API_URL } from '../services/api';
 
 export default function SignUp() {
 	const [username, setUsername] = useState('');
@@ -12,7 +12,7 @@ export default function SignUp() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const res = await fetch('http://localhost:3000/sign-up', {
+			const res = await fetch(`${API_URL}/sign-up`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ username, password, passwordConfirmation }),

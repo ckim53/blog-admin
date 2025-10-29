@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { API_URL } from '../services/api';
 import { Button, Text, Group, Title, Input } from '@mantine/core';
 import { useAuth } from '../auth/AuthProvider';
 
@@ -17,7 +17,7 @@ export default function Login() {
 		setError('');
 
 		try {
-			const res = await fetch('http://localhost:3000/log-in', {
+			const res = await fetch(`${API_URL}/log-in`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ username, password }),
