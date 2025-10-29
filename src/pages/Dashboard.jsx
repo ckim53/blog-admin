@@ -2,7 +2,14 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import PostCard from '../components/PostCard';
-import { Text, Box, Button, Group } from '@mantine/core';
+import {
+	Text,
+	Box,
+	Button,
+	Group,
+	SegmentedControl,
+	Flex,
+} from '@mantine/core';
 import { useAuth } from '../auth/AuthProvider';
 import { useApiFetch } from '../services/apiFetch';
 import { API_URL } from '../services/api';
@@ -27,6 +34,12 @@ function Dashboard() {
 		return true;
 	});
 
+	const data = [
+		{ label: 'All', value: 'all' },
+		{ label: 'Published', value: 'published' },
+		{ label: 'Unpublished', value: 'unpublished' },
+	];
+
 	useEffect(() => {
 		apiFetch(`${API_URL}/admin/${authorId}/posts`, {
 			headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -39,8 +52,8 @@ function Dashboard() {
 	useEffect(() => {}, [user]);
 
 	return (
-		<Box px={50}>
-			<Group mt={10}>
+		<Flex direction="column" px={50} mt={10} justify="center">
+			<Group>
 				<Text
 					style={{
 						color: 'white',
@@ -66,10 +79,10 @@ function Dashboard() {
 				>
 					New Post
 				</Button>
-
 				<LogoutButton />
 			</Group>
-			<Group mt="md" my="lg">
+
+			{/* <Group mt="md" my="lg">
 				{['all', 'published', 'unpublished'].map((type) => (
 					<Button
 						key={type}
@@ -81,13 +94,29 @@ function Dashboard() {
 						{type.charAt(0).toUpperCase() + type.slice(1)}
 					</Button>
 				))}
+			</Group> */}
+			<Group>
+				<SegmentedControl
+					radius="md"
+					mt={20}
+					color="teal"
+					data={data}
+					onChange={setFilter}
+				/>
 			</Group>
-			<Box className="posts-grid">
-				{filteredPosts.map((p) => (
-					<PostCard key={p.id} post={p} />
-				))}
-			</Box>
-		</Box>
+
+			{filteredPosts.length > 0 ? (
+				<Box className="posts-grid" mt="xl">
+					{filteredPosts.map((p) => (
+						<PostCard key={p.id} post={p} />
+					))}
+				</Box>
+			) : (
+				<Text c="dimmed" ta="center" size="lg" style={{ gridColumn: '1 / -1' }}>
+					No posts yet ☕
+				</Text>
+			)}
+		</Flex>
 	);
 }
 
