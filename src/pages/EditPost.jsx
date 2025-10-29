@@ -150,92 +150,90 @@ function EditPost() {
 
 	return (
 		<Box>
-			<form onSubmit={handleSubmit} style={{ width: '800px' }}>
-				<Container mb="lg">
-					<Paper radius="lg" shadow="xl" p="xl">
-						<Stack gap="lg">
-							<Group justify="space-between">
-								<Input
-									autoFocus
-									color="black"
-									required
-									value={post.title}
-									styles={{
-										input: { fontSize: '34px', fontWeight: 700 },
-									}}
-									onChange={(e) => {
-										setPost({ ...post, title: e.target.value });
-									}}
-								></Input>
-								<Button variant="light" color="red" onClick={handleDeletePost}>
-									Delete Post
-								</Button>
-							</Group>
-							<Switch
-								size="md"
-								checked={post.published}
-								label="Publish"
-								onChange={(e) => {
-									setPost({ ...post, published: e.currentTarget.checked });
+			<form onSubmit={handleSubmit} w="100%">
+				<Paper radius="lg" shadow="xl" p="xl">
+					<Stack gap="lg">
+						<Group justify="space-between">
+							<Input
+								autoFocus
+								color="black"
+								required
+								value={post.title}
+								styles={{
+									input: { fontSize: '34px', fontWeight: 700 },
 								}}
-							/>
-							<Textarea
-								autosize
-								size="lg"
-								value={post.content}
 								onChange={(e) => {
-									setPost({ ...post, content: e.target.value });
+									setPost({ ...post, title: e.target.value });
 								}}
-							></Textarea>
-							<Paper bg="gray.1" radius="lg" shadow="sm" p="xl" mb="lg">
-								<Title order={4}>
-									{comments.length}{' '}
-									{comments.length === 1 ? 'Comment' : 'Comments'}
-								</Title>
-								{comments.length === 0 ? (
-									''
-								) : (
-									<Paper bg="white" mt="md" shadow="sm" p="md" radius="md">
-										<Stack>
-											{comments.map((c) => (
-												<Comment
-													key={c.id}
-													comment={c}
-													edit
-													handleDelete={handleDeleteComment}
-												/>
-											))}
-										</Stack>
-									</Paper>
-								)}
-							</Paper>
-						</Stack>
-						<Button
+							></Input>
+							<Button variant="light" color="red" onClick={handleDeletePost}>
+								Delete Post
+							</Button>
+						</Group>
+						<Switch
 							size="md"
-							radius="md"
-							type="submit"
-							disabled={!isChanged}
-							style={{
-								backgroundColor: isChanged ? '#2e949f' : '#ccc',
-								color: 'white',
-								cursor: isChanged ? 'pointer' : 'not-allowed',
-								transition: 'background-color 0.2s ease',
+							checked={post.published}
+							label="Publish"
+							onChange={(e) => {
+								setPost({ ...post, published: e.currentTarget.checked });
 							}}
-						>
-							Save Changes
-						</Button>
-						<Button
-							size="md"
-							mx="md"
-							variant="outline"
-							color="gray"
-							radius="md"
-							onClick={() => navigate(-1)}
-						>
-							Cancel
-						</Button>
-					</Paper>
-				</Container>
+						/>
+						<Textarea
+							autosize
+							size="lg"
+							value={post.content}
+							onChange={(e) => {
+								setPost({ ...post, content: e.target.value });
+							}}
+						></Textarea>
+						<Paper bg="gray.1" radius="lg" shadow="sm" p="xl" mb="lg">
+							<Title order={4}>
+								{comments.length}{' '}
+								{comments.length === 1 ? 'Comment' : 'Comments'}
+							</Title>
+							{comments.length === 0 ? (
+								''
+							) : (
+								<Paper bg="white" mt="md" shadow="sm" p="md" radius="md">
+									<Stack>
+										{comments.map((c) => (
+											<Comment
+												key={c.id}
+												comment={c}
+												edit
+												handleDelete={handleDeleteComment}
+											/>
+										))}
+									</Stack>
+								</Paper>
+							)}
+						</Paper>
+					</Stack>
+					<Button
+						size="md"
+						radius="md"
+						type="submit"
+						disabled={!isChanged}
+						style={{
+							backgroundColor: isChanged ? '#2e949f' : '#ccc',
+							color: 'white',
+							cursor: isChanged ? 'pointer' : 'not-allowed',
+							transition: 'background-color 0.2s ease',
+						}}
+					>
+						Save Changes
+					</Button>
+					<Button
+						size="md"
+						mx="md"
+						variant="outline"
+						color="gray"
+						radius="md"
+						onClick={() => navigate(-1)}
+					>
+						Cancel
+					</Button>
+				</Paper>
 			</form>
 		</Box>
 	);

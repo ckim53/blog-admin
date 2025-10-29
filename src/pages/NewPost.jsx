@@ -49,67 +49,56 @@ function NewPost() {
 	};
 
 	return (
-		<Box>
-			<form onSubmit={handleSubmit} style={{ width: '800px' }}>
-				<Container mb="lg">
-					<Paper radius="lg" shadow="xl" p="xl">
-						<Stack gap="lg">
-							<Group justify="space-between">
-								<Input
-									autoFocus
-									color="black"
-									placeholder={'Title'}
-									required
-									styles={{
-										input: { fontSize: '34px', fontWeight: 700 },
-									}}
-									onChange={(e) => {
-										setPost({ ...post, title: e.target.value });
-									}}
-								></Input>
-								<Switch
-									size="md"
-									defaultChecked
-									label="Publish"
-									onChange={(e) => {
-										setPost({ ...post, published: e.currentTarget.checked });
-									}}
-								/>
-							</Group>
-							<Textarea
-								required
-								autosize
-								minRows={4}
-								maxRows={12}
-								placeholder="Content"
-								size="lg"
-								onChange={(e) => setPost({ ...post, content: e.target.value })}
-							/>
-						</Stack>
-						<Group mt="lg">
-							<Button
-								size="md"
-								radius="md"
-								type="submit"
-								onClick={handleSubmit}
-							>
-								Create Post
-							</Button>
-							<Button
-								size="md"
-								m="md"
-								variant="outline"
-								color="gray"
-								radius="md"
-								onClick={() => navigate(-1)}
-							>
-								Cancel
-							</Button>
-						</Group>
-					</Paper>
-				</Container>
-			</form>
-		</Box>
+		<Paper radius="lg" shadow="xl" p="xl" w="100%">
+			<Stack gap="lg">
+				<Group justify="space-between">
+					<Input
+						autoFocus
+						color="black"
+						placeholder={'Title'}
+						required
+						styles={{
+							input: { fontSize: '34px', fontWeight: 700 },
+						}}
+						onChange={(e) => {
+							setPost({ ...post, title: e.target.value });
+						}}
+					></Input>
+					<Switch
+						size="md"
+						defaultChecked
+						label="Publish"
+						onChange={(e) => {
+							setPost({ ...post, published: e.currentTarget.checked });
+						}}
+					/>
+				</Group>
+				<Textarea
+					required
+					autosize
+					minRows={4}
+					maxRows={12}
+					placeholder="Content"
+					size="lg"
+					onChange={(e) => setPost({ ...post, content: e.target.value })}
+				/>
+			</Stack>
+			<Group mt="lg">
+				<Button size="md" radius="md" type="submit" onClick={handleSubmit}>
+					Create Post
+				</Button>
+				<Button
+					size="md"
+					m="md"
+					variant="outline"
+					color="gray"
+					radius="md"
+					onClick={() => navigate(-1)}
+				>
+					Cancel
+				</Button>
+			</Group>
+		</Paper>
 	);
 }
 

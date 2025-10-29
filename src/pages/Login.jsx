@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_URL } from '../services/api';
-import { Button, Text, Group, Title, Input } from '@mantine/core';
+import { Button, Text, Group, Title, Input, Box } from '@mantine/core';
 import { useAuth } from '../auth/AuthProvider';
 
 export default function Login() {
@@ -40,61 +40,73 @@ export default function Login() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<Text c="white" td="none" ta="center">
-				<Title order={1}>Login</Title>
-				<Title order={2}>
-					<Group my="10px" justify="center">
-						<Text size="lg">Don't have an account?</Text>
-						<Text
-							size="lg"
-							component={Link}
-							to="/sign-up"
-							style={{
-								color: 'white',
-								textDecoration: 'none',
-								fontWeight: 'bold',
-							}}
-						>
-							Sign Up
-						</Text>
-					</Group>
-				</Title>
-				{error &&
-					error.split(';').map((msg, i) => (
-						<p key={i} style={{ color: 'red', margin: 0 }}>
-							{msg.trim()}
-						</p>
-					))}
-				<Input
-					my="lg"
-					size="md"
-					radius="md"
-					type="text"
-					placeholder="Username"
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-				></Input>
-				<Input
-					my="lg"
-					size="md"
-					radius="md"
-					type="password"
-					placeholder="Password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				></Input>
-				<Button
-					type="submit"
-					style={{ backgroundColor: '#2e949f' }}
-					size="lg"
-					p="sm"
-					radius="md"
-					mt="md"
-				>
-					Log In
-				</Button>
-			</Text>
-		</form>
+		<Box ta="center" mt={30}>
+			<form onSubmit={handleSubmit}>
+				<Text c="white" td="none">
+					<Title order={1}>Login</Title>
+					<Title order={2}>
+						<Group my="10px" justify="center">
+							<Text size="lg">Don't have an account?</Text>
+							<Text
+								size="lg"
+								component={Link}
+								to="/sign-up"
+								style={{
+									color: 'white',
+									textDecoration: 'none',
+									fontWeight: 'bold',
+								}}
+							>
+								Sign Up
+							</Text>
+						</Group>
+					</Title>
+					{error &&
+						error.split(';').map((msg, i) => (
+							<p key={i} style={{ color: 'red', margin: 0 }}>
+								{msg.trim()}
+							</p>
+						))}
+					<Input
+						my="lg"
+						size="md"
+						radius="md"
+						type="text"
+						placeholder="Username"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+					></Input>
+					<Input
+						my="lg"
+						size="md"
+						radius="md"
+						type="password"
+						placeholder="Password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					></Input>
+					<Button
+						type="submit"
+						style={{ backgroundColor: '#2e949f' }}
+						size="lg"
+						p="sm"
+						radius="md"
+						my="md"
+					>
+						Log In
+					</Button>
+				</Text>
+			</form>
+			<Title
+				td="none"
+				component={Link}
+				to="/"
+				c="white"
+				fontWeight={700}
+				order={5}
+			>
+				Back to Home
+			</Title>
+		</Box>
 	);
 }

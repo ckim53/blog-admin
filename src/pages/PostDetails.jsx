@@ -9,13 +9,11 @@ import { API_URL } from '../services/api';
 import {
 	Group,
 	Button,
-	Container,
 	Paper,
 	Text,
 	Title,
 	Stack,
 	Badge,
-	Switch,
 } from '@mantine/core';
 
 function PostDetails() {
@@ -27,23 +25,6 @@ function PostDetails() {
 	const token = localStorage.getItem('token');
 	const navigate = useNavigate();
 	const apiFetch = useApiFetch();
-
-	const togglePublish = async () => {
-		try {
-			const res = await apiFetch(`${API_URL}/admin/${user.id}/posts/${id}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({ published: !post.published }),
-			});
-			const json = await res.json();
-			setPost(json.data);
-		} catch (err) {
-			console.error(err);
-		}
-	};
 
 	const formatDate = (iso) => {
 		if (!iso) return '';
@@ -123,7 +104,7 @@ function PostDetails() {
 		navigate('/');
 	} else {
 		return (
-			<Paper radius="lg" shadow="xl" p="xl">
+			<Paper radius="lg" shadow="xl" p="xl" w="100%">
 				<Group
 					justify="space-between"
 					align="flex-start"

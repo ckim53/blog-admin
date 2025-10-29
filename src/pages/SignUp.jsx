@@ -1,6 +1,7 @@
-import { Button, Box, Title, Input } from '@mantine/core';
+import { Button, Box, Title, Input, Text } from '@mantine/core';
 import { useState } from 'react';
 import { API_URL } from '../services/api';
+import { Link } from 'react-router-dom';
 
 export default function SignUp() {
 	const [username, setUsername] = useState('');
@@ -39,7 +40,7 @@ export default function SignUp() {
 	};
 
 	return (
-		<Box ta="center">
+		<Box ta="center" mt={30}>
 			<form onSubmit={handleSubmit}>
 				<Title mb="20px" order={1} c="white" td="none">
 					Sign Up
@@ -84,11 +85,21 @@ export default function SignUp() {
 					size="lg"
 					p="sm"
 					radius="md"
-					mt="md"
+					my="md"
 				>
 					Sign Up
 				</Button>
 			</form>
+			<Title
+				td="none"
+				component={Link}
+				to="/"
+				c="white"
+				fontWeight={700}
+				order={5}
+			>
+				Back to Home
+			</Title>
 		</Box>
 	);
 }
