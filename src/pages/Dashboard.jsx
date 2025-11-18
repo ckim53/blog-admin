@@ -109,7 +109,7 @@ function Dashboard() {
 			</Group>
 
 			{filteredPosts.length > 0 ? (
-				<Box className="posts-grid" mt="xl">
+				<Box className="posts-grid" mt="xl" w="93vw">
 					{filteredPosts.map((p) => (
 						<PostCard key={p.id} post={p} />
 					))}
