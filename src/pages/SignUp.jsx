@@ -51,12 +51,6 @@ export default function SignUp() {
 		>
 			<Box ta="center" mt={30} pt={40} pb={40}>
 				<form onSubmit={handleSubmit}>
-<<<<<<< HEAD
-					<Title mb="20px" order={1} c="white" td="none">
-						Sign Up
-					</Title>
-
-=======
 					<Text c="white" td="none">
 						<Title order={1}>Sign Up</Title>
 						<Title order={2}>
@@ -77,7 +71,6 @@ export default function SignUp() {
 							</Group>
 						</Title>
 					</Text>
->>>>>>> cae9d86 (Implement loader and guest login)
 					{error &&
 						error.split(';').map((msg, i) => (
 							<p key={i} style={{ color: 'red', margin: 0 }}>
