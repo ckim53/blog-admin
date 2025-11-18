@@ -9,6 +9,8 @@ import {
 	Group,
 	SegmentedControl,
 	Flex,
+	Loader,
+	Center,
 } from '@mantine/core';
 import { useAuth } from '../auth/AuthProvider';
 import { useApiFetch } from '../services/apiFetch';
@@ -23,6 +25,13 @@ function Dashboard() {
 	const { user } = useAuth();
 	const apiFetch = useApiFetch();
 	const navigate = useNavigate();
+
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		const timer = setTimeout(() => setLoading(false), 300);
+		return () => clearTimeout(timer);
+	}, []);
 
 	const handleNewPost = () => {
 		navigate(`/admin/${user.id}/posts/new`);
@@ -50,6 +59,14 @@ function Dashboard() {
 	}, []);
 
 	useEffect(() => {}, [user]);
+
+	if (loading) {
+		return (
+			<Center mt={200}>
+				<Loader color="blue" />
+			</Center>
+		);
+	}
 
 	return (
 		<Flex direction="column" px={50} mt={10} justify="center">
@@ -81,20 +98,6 @@ function Dashboard() {
 				</Button>
 				<LogoutButton />
 			</Group>
-
-			{/* <Group mt="md" my="lg">
-				{['all', 'published', 'unpublished'].map((type) => (
-					<Button
-						key={type}
-						variant={filter === type ? 'filled' : 'light'}
-						color={filter === type ? 'teal' : 'gray'}
-						radius="md"
-						onClick={() => setFilter(type)}
-					>
-						{type.charAt(0).toUpperCase() + type.slice(1)}
-					</Button>
-				))}
-			</Group> */}
 			<Group>
 				<SegmentedControl
 					radius="md"
@@ -112,9 +115,17 @@ function Dashboard() {
 					))}
 				</Box>
 			) : (
-				<Text c="dimmed" ta="center" size="lg" style={{ gridColumn: '1 / -1' }}>
-					No posts yet ☕
-				</Text>
+				<Box className="posts-grid" mt="xl" w="93vw">
+					<Text
+						c="dimmed"
+						m="xs"
+						ta="left"
+						size="xl"
+						style={{ gridColumn: '1 / -1' }}
+					>
+						No posts yet ☕
+					</Text>
+				</Box>
 			)}
 		</Flex>
 	);

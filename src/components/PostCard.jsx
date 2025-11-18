@@ -52,7 +52,7 @@ export function PostCard({ post }) {
 			}}
 		>
 			<Box mb={8}>
-				<Stack preventGrowOverflow={false} wrap="nowrap">
+				<Stack preventgrowoverflow="false" wrap="nowrap">
 					<Title order={1} style={{ overflowWrap: 'anywhere' }}>
 						{post.title}
 					</Title>

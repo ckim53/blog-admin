@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { IconEdit, IconCheck, IconX } from '@tabler/icons-react';
+import { IconEdit } from '@tabler/icons-react';
 import { useAuth } from '../auth/AuthProvider';
 import Comment from '../components/Comment';
 import { useApiFetch } from '../services/apiFetch';
 import { API_URL } from '../services/api';
+import { useDisclosure } from '@mantine/hooks';
 
 import {
 	Group,
@@ -14,10 +15,12 @@ import {
 	Title,
 	Stack,
 	Badge,
+	Loader,
+	Center,
 } from '@mantine/core';
 
 function PostDetails() {
-	const { id } = useParams();
+	const { authorId, id } = useParams();
 	const { isAuthenticated, user } = useAuth();
 	const [post, setPost] = useState(null);
 	const [comments, setComments] = useState([]);
@@ -25,6 +28,11 @@ function PostDetails() {
 	const token = localStorage.getItem('token');
 	const navigate = useNavigate();
 	const apiFetch = useApiFetch();
+	const [visible, { toggle }] = useDisclosure(false);
+
+	console.log(authorId);
+	console.log(id);
+	console.log(post);
 
 	const formatDate = (iso) => {
 		if (!iso) return '';
@@ -62,7 +70,13 @@ function PostDetails() {
 			.catch((err) => console.error(err));
 	}, [id]);
 
-	if (!post) return <p>Loading...</p>;
+	if (!post) {
+		return (
+			<Center mt={200}>
+				<Loader color="blue" />
+			</Center>
+		);
+	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

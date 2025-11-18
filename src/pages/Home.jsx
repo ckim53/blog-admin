@@ -1,10 +1,35 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Paper, Title, Text, Button, Box } from '@mantine/core';
+import { Paper, Title, Text, Button, Box, Group } from '@mantine/core';
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { API_URL } from '../services/api';
+import { useAuth } from '../auth/AuthProvider';
 
 function Home() {
 	const navigate = useNavigate();
+	const { login } = useAuth();
+
+	const handleDemo = async (e) => {
+		e.preventDefault();
+
+		try {
+			const res = await fetch(`${API_URL}/demo`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ guest: true }),
+			});
+
+			const data = await res.json();
+
+			if (res.ok && data.ok) {
+				login(data);
+				window.dispatchEvent(new Event('authChange'));
+				navigate(`/admin/${data.user.id}/posts`);
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	useEffect(() => {
 		const userId = localStorage.getItem('userId');
@@ -57,28 +82,28 @@ function Home() {
 				<Text c="dimmed" ta="center" style={{ fontSize: '20px' }}>
 					A space to slow down, reflect, and share thoughts—one sip at a time.
 				</Text>
-				<Button
-					style={{ backgroundColor: '#2e949f' }}
-					size="lg"
-					p="sm"
-					radius="md"
-					mt="lg"
-					component={Link}
-					to="/log-in"
-				>
-					Log In
-				</Button>
-				<br />
+				<Group justify="center">
+					<Button
+						style={{ backgroundColor: '#2e949f' }}
+						size="lg"
+						p="sm"
+						radius="md"
+						mt="md"
+						component={Link}
+						to="/sign-up"
+					>
+						Sign Up
+					</Button>
+				</Group>
 				<Button
 					style={{ backgroundColor: '#2e949f' }}
 					size="lg"
 					p="sm"
 					radius="md"
 					mt="md"
-					component={Link}
-					to="/sign-up"
+					onClick={handleDemo}
 				>
-					Sign Up
+					Guest User
 				</Button>
 			</Paper>
 		</Box>
