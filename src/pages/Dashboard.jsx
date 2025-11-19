@@ -25,7 +25,6 @@ function Dashboard() {
 	const { user } = useAuth();
 	const apiFetch = useApiFetch();
 	const navigate = useNavigate();
-
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
