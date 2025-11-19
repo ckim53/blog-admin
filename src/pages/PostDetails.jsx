@@ -147,7 +147,7 @@ function PostDetails() {
 							)}
 						</Group>
 						<Text color="gray" size="lg">
-							By {post?.author?.username} • {formatDate(post?.createdAt)}
+							By {post?.author?.displayName} • {formatDate(post?.createdAt)}
 						</Text>
 					</Stack>
 				</Group>
