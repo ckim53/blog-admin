@@ -5,7 +5,6 @@ import { useAuth } from '../auth/AuthProvider';
 import Comment from '../components/Comment';
 import { useApiFetch } from '../services/apiFetch';
 import { API_URL } from '../services/api';
-import { useDisclosure } from '@mantine/hooks';
 
 import {
 	Group,
@@ -28,11 +27,6 @@ function PostDetails() {
 	const token = localStorage.getItem('token');
 	const navigate = useNavigate();
 	const apiFetch = useApiFetch();
-	const [visible, { toggle }] = useDisclosure(false);
-
-	console.log(authorId);
-	console.log(id);
-	console.log(post);
 
 	const formatDate = (iso) => {
 		if (!iso) return '';

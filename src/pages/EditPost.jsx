@@ -166,9 +166,11 @@ function EditPost() {
 									setPost({ ...post, title: e.target.value });
 								}}
 							></Input>
-							<Button variant="light" color="red" onClick={handleDeletePost}>
-								Delete Post
-							</Button>
+							{!post.isProtected && (
+								<Button variant="light" color="red" onClick={handleDeletePost}>
+									Delete Post
+								</Button>
+							)}
 						</Group>
 						<Switch
 							size="md"

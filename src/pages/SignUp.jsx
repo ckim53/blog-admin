@@ -9,6 +9,7 @@ export default function SignUp() {
 	const [passwordConfirmation, setPasswordConfirmation] = useState('');
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState('');
+	const [displayName, setDisplayName] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -16,7 +17,7 @@ export default function SignUp() {
 			const res = await fetch(`${API_URL}/sign-up`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ username, password, passwordConfirmation }),
+				body: JSON.stringify({ username, password, passwordConfirmation, displayName }),
 			});
 			const data = await res.json();
 			if (res.ok && data.ok) {
@@ -88,6 +89,16 @@ export default function SignUp() {
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 					/>
+					<Input
+						my="lg"
+						size="md"
+						radius="md"
+						type="text"
+						placeholder="Display Name (optional)"
+						value={displayName}
+						onChange={(e) => setDisplayName(e.target.value)}
+					/>
+
 					<Input
 						my="lg"
 						size="md"
