@@ -134,15 +134,17 @@ function PostDetails() {
 							<Badge size="lg" color={post.published ? 'blue' : 'gray'}>
 								{post.published ? 'Published' : 'Unpublished'}
 							</Badge>
-							<Button
-								variant="subtle"
-								onClick={handleEdit}
-								radius="md"
-								mt={{ base: 'sm', sm: 0 }}
-								style={{ width: 'fit-content' }}
-							>
-								<IconEdit size={30} />
-							</Button>
+							{!post.isProtected && (
+								<Button
+									variant="subtle"
+									onClick={handleEdit}
+									radius="md"
+									mt={{ base: 'sm', sm: 0 }}
+									style={{ width: 'fit-content' }}
+								>
+									<IconEdit size={30} />
+								</Button>
+							)}
 						</Group>
 						<Text color="gray" size="lg">
 							By {post?.author?.username} • {formatDate(post?.createdAt)}
