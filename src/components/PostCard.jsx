@@ -15,7 +15,7 @@ import { useAuth } from '../auth/AuthProvider';
 export function PostCard({ post }) {
 	const { isAuthenticated, user } = useAuth();
 	const navigate = useNavigate();
-	const authorName = post?.author?.username || 'Unknown';
+	const authorName = post?.author?.displayName || 'Unknown';
 	const commentCount = Array.isArray(post?.comments) ? post.comments.length : 0;
 	const preview =
 		(post?.content || '').length > 120
