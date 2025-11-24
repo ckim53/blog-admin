@@ -49,14 +49,25 @@ function Dashboard() {
 		{ label: 'Unpublished', value: 'unpublished' },
 	];
 
+	// useEffect(() => {
+	// 	apiFetch(`${API_URL}/admin/${authorId}/posts`, {
+	// 		headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+	// 	})
+	// 		.then((res) => res.json())
+	// 		.then((json) => setPosts(json.data))
+	// 		.catch((err) => console.error(err));
+	// }, []);
+
 	useEffect(() => {
-		apiFetch(`${API_URL}/admin/${authorId}/posts`, {
+		if (!user || loadingAuth) return;
+
+		apiFetch(`${API_URL}/admin/${user.id}/posts`, {
 			headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
 		})
 			.then((res) => res.json())
 			.then((json) => setPosts(json.data))
 			.catch((err) => console.error(err));
-	}, []);
+	}, [user, loadingAuth]);
 
 	useEffect(() => {}, [user]);
 
