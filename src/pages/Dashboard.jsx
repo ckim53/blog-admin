@@ -77,7 +77,7 @@ function Dashboard() {
 		);
 	}
 
-	if (!user) {
+	if (!isAuthenticated || !user) {
 		return navigate('/');
 	}
 

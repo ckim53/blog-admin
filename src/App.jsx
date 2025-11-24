@@ -12,29 +12,31 @@ import NewPost from './pages/NewPost';
 
 function App() {
 	return (
-		<AuthProvider>
-			<BrowserRouter>
-				<Routes>
-					<Route element={<Layout />}>
-						<Route path="/" element={<Home />} />
-						<Route path="/admin/:authorId/posts" element={<Dashboard />} />
-					</Route>
-					<Route element={<DetailsLayout />}>
-						<Route
-							path="/admin/:authorId/posts/:id"
-							element={<PostDetails />}
-						/>
-						<Route
-							path="/admin/:authorId/posts/:id/edit"
-							element={<EditPost />}
-						/>
-						<Route path="/admin/:authorId/posts/new" element={<NewPost />} />
-					</Route>
-					<Route path="/log-in" element={<Login />} />
-					<Route path="/sign-up" element={<SignUp />} />
-				</Routes>
-			</BrowserRouter>
-		</AuthProvider>
+		<App>
+			<AuthProvider>
+				<BrowserRouter>
+					<Routes>
+						<Route element={<Layout />}>
+							<Route path="/" element={<Home />} />
+							<Route path="/admin/:authorId/posts" element={<Dashboard />} />
+						</Route>
+						<Route element={<DetailsLayout />}>
+							<Route
+								path="/admin/:authorId/posts/:id"
+								element={<PostDetails />}
+							/>
+							<Route
+								path="/admin/:authorId/posts/:id/edit"
+								element={<EditPost />}
+							/>
+							<Route path="/admin/:authorId/posts/new" element={<NewPost />} />
+						</Route>
+						<Route path="/log-in" element={<Login />} />
+						<Route path="/sign-up" element={<SignUp />} />
+					</Routes>
+				</BrowserRouter>
+			</AuthProvider>
+		</App>
 	);
 }
 
