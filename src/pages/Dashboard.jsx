@@ -69,14 +69,16 @@ function Dashboard() {
 			.catch((err) => console.error(err));
 	}, [user, loadingAuth]);
 
-	useEffect(() => {}, [user]);
-
 	if (loading || loadingAuth) {
 		return (
 			<Center mt={200}>
 				<Loader color="blue" />
 			</Center>
 		);
+	}
+
+	if (!user) {
+		return navigate('/');
 	}
 
 	return (
@@ -102,7 +104,7 @@ function Dashboard() {
 					onClick={handleNewPost}
 					radius="md"
 					size="md"
-					mx="lg"
+					mx="md"
 					leftSection={<IconLibraryPlus></IconLibraryPlus>}
 				>
 					New Post

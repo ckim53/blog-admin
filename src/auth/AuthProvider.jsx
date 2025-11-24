@@ -17,10 +17,26 @@ export function AuthProvider({ children }) {
 		return { isAuthenticated: false, user: null, token: null };
 	};
 
-	const [state, setState] = useState(init);
+	const [state, setState] = useState({
+		isAuthenticated: false,
+		user: null,
+		token: null,
+	});
+
 	const [loadingAuth, setLoadingAuth] = useState(true);
 
 	useEffect(() => {
+		const t = localStorage.getItem('token');
+		if (!t) {
+			setLoadingAuth(false);
+			return;
+		}
+
+		try {
+			applyToken(t);
+		} catch {
+			localStorage.removeItem('token');
+		}
 		setLoadingAuth(false);
 	}, []);
 
