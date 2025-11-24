@@ -17,6 +17,7 @@ import { useApiFetch } from '../services/apiFetch';
 import { API_URL } from '../services/api';
 import { IconLibraryPlus, IconCoffee } from '@tabler/icons-react';
 import LogoutButton from '../components/LogoutButton';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
 	const { authorId } = useParams();
@@ -94,6 +95,14 @@ function Dashboard() {
 					leftSection={<IconLibraryPlus></IconLibraryPlus>}
 				>
 					New Post
+				</Button>
+				<Button
+					component={Link}
+					to="https://coffee-break.up.railway.app"
+					radius="md"
+					size="md"
+				>
+					Public Feed
 				</Button>
 				<LogoutButton />
 			</Group>
