@@ -8,7 +8,7 @@ export default function Comment({ comment, edit = false, handleDelete }) {
 			<Text key={comment.id} component="div">
 				<Group gap="xl">
 					<Text size="lg" fw={700}>
-						{comment.author.displayName}
+						{comment.author.username}
 					</Text>
 					<Text color="gray">
 						{new Date(comment.createdAt).toLocaleString()}
