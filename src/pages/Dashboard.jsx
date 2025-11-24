@@ -71,7 +71,7 @@ function Dashboard() {
 
 	useEffect(() => {}, [user]);
 
-	if (loading || loadingAuth || !user) {
+	if (loading || loadingAuth) {
 		return (
 			<Center mt={200}>
 				<Loader color="blue" />
