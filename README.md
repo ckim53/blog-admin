@@ -4,6 +4,8 @@ Author dashboard built with React and Mantine UI for creating, editing, publishi
 
 Live Demo: [coffee-break-cms.up.railway.app](https://coffee-break-cms.up.railway.app/)
 
+Public Blog: [coffee-break.up.railway.app](https://coffee-break.up.railway.app/)
+
 ![Welcome Page](images/blog-welcome.png)
 
 ![Login Page](images/blog-login.png)
