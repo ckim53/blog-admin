@@ -18,6 +18,11 @@ export function AuthProvider({ children }) {
 	};
 
 	const [state, setState] = useState(init);
+	const [loadingAuth, setLoadingAuth] = useState(true);
+
+	useEffect(() => {
+		setLoadingAuth(false);
+	}, []);
 
 	const applyToken = (token) => {
 		try {
@@ -80,11 +85,12 @@ export function AuthProvider({ children }) {
 			isAuthenticated: state.isAuthenticated,
 			user: state.user,
 			token: state.token,
+			loadingAuth,
 			login,
 			logout,
 			getUserId: () => localStorage.getItem('userId'),
 		}),
-		[state]
+		[state, loadingAuth]
 	);
 
 	return <AuthCtx.Provider value={value}>{children}</AuthCtx.Provider>;

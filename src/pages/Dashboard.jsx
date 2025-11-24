@@ -23,7 +23,7 @@ function Dashboard() {
 	const { authorId } = useParams();
 	const [posts, setPosts] = useState([]);
 	const [filter, setFilter] = useState('all');
-	const { user } = useAuth();
+	const { user, loadingAuth } = useAuth();
 	const apiFetch = useApiFetch();
 	const navigate = useNavigate();
 	const [loading, setLoading] = useState(true);
@@ -60,7 +60,7 @@ function Dashboard() {
 
 	useEffect(() => {}, [user]);
 
-	if (loading || !user) {
+	if (loading || loadingAuth || !user) {
 		return (
 			<Center mt={200}>
 				<Loader color="blue" />
