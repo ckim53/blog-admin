@@ -17,21 +17,17 @@ function App() {
 				<Routes>
 					<Route element={<Layout />}>
 						<Route path="/" element={<Home />} />
-						<Route path="/admin/:authorId/posts" element={<Dashboard />} />
+						<Route path="/log-in" element={<Login />} />
+						<Route path="/sign-up" element={<SignUp />} />
 					</Route>
-					<Route element={<DetailsLayout />}>
-						<Route
-							path="/admin/:authorId/posts/:id"
-							element={<PostDetails />}
-						/>
-						<Route
-							path="/admin/:authorId/posts/:id/edit"
-							element={<EditPost />}
-						/>
-						<Route path="/admin/:authorId/posts/new" element={<NewPost />} />
+					<Route path="/admin/:authorId/posts" element={<Layout />}>
+						<Route index element={<Dashboard />} />
+						<Route path="new" element={<NewPost />} />
+						<Route path=":id" element={<DetailsLayout />}>
+							<Route index element={<PostDetails />} />
+							<Route path="edit" element={<EditPost />} />
+						</Route>
 					</Route>
-					<Route path="/log-in" element={<Login />} />
-					<Route path="/sign-up" element={<SignUp />} />
 				</Routes>
 			</BrowserRouter>
 		</AuthProvider>
