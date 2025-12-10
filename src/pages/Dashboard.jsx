@@ -20,10 +20,9 @@ import LogoutButton from '../components/LogoutButton';
 import { Link } from 'react-router-dom';
 
 function Dashboard() {
-	const { authorId } = useParams();
 	const [posts, setPosts] = useState([]);
 	const [filter, setFilter] = useState('all');
-	const { user, loadingAuth } = useAuth();
+	const { user, loadingAuth, isAuthenticated } = useAuth();
 	const apiFetch = useApiFetch();
 	const navigate = useNavigate();
 
@@ -49,15 +48,6 @@ function Dashboard() {
 		{ label: 'Published', value: 'published' },
 		{ label: 'Unpublished', value: 'unpublished' },
 	];
-
-	// useEffect(() => {
-	// 	apiFetch(`${API_URL}/admin/${authorId}/posts`, {
-	// 		headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then((json) => setPosts(json.data))
-	// 		.catch((err) => console.error(err));
-	// }, []);
 
 	useEffect(() => {
 		if (!user || loadingAuth) return;
