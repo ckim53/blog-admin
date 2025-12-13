@@ -5,7 +5,7 @@ import { useAuth } from '../auth/AuthProvider';
 import Comment from '../components/Comment';
 import { useApiFetch } from '../services/apiFetch';
 import { API_URL } from '../services/api';
-
+import { Link } from 'react-router-dom';
 import {
 	Group,
 	Button,
@@ -210,7 +210,7 @@ function PostDetails() {
 					</Paper>
 				) : (
 					<Text c="dimmed" mt="md">
-						<a href="/log-in">Log in</a> to add a comment.
+						<Link to="/log-in">Log in</Link> to add a comment.
 					</Text>
 				)}
 			</Paper>
