@@ -49,8 +49,8 @@ function NewPost() {
 	};
 
 	return (
-		<div className="new-post">
-			<Paper radius="lg" shadow="xl" p="xl" w="90%" maw={900} mx={20}>
+		<Box w="60%" px="md">
+			<Paper radius="lg" shadow="xl" p="xl">
 				<Stack gap="lg">
 					<Group justify="space-between">
 						<Input
@@ -100,7 +100,7 @@ function NewPost() {
 					</Button>
 				</Group>
 			</Paper>
-		</div>
+		</Box>
 	);
 }
 

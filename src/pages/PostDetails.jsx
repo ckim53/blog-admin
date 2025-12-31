@@ -112,7 +112,7 @@ function PostDetails() {
 		navigate('/');
 	} else {
 		return (
-			<Paper radius="lg" shadow="xl" p="xl" w="100%">
+			<Paper radius="lg" shadow="xl" p="xl" w="100%" miw={800}>
 				<Group
 					justify="space-between"
 					align="flex-start"

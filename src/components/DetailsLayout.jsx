@@ -16,7 +16,7 @@ export default function DetailsLayout() {
 	}, []);
 
 	return (
-		<Box className="details-layout" pos="relative" mih="100vh" p="xl" pb="xl">
+		<Box className="details-layout" pos="relative" mih="100vh" p="md" pb="xl">
 			<Button
 				size="md"
 				m="lg"
